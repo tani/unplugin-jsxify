@@ -5,13 +5,13 @@
   "packageManager": "pnpm@8.6.12",
   "description": "",
   "license": "MIT",
-  "homepage": "https://github.com/antfu/unplugin-jsxify#readme",
+  "homepage": "https://github.com/tani/unplugin-jsxify#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/antfu/unplugin-jsxify.git"
+    "url": "git+https://github.com/tani/unplugin-jsxify.git"
   },
   "bugs": {
-    "url": "https://github.com/antfu/unplugin-jsxify/issues"
+    "url": "https://github.com/tani/unplugin-jsxify/issues"
   },
   "keywords": [
     "unplugin",
