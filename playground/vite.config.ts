@@ -10,6 +10,7 @@ export default defineConfig({
         extensions: ['.html', '.htm'],
         jsxImportSource: 'react',
         render: (src: string) => src,
+        extract: (_src: string) => ({ date: new Date() }),
       },
     }),
   ],

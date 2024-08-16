@@ -7,7 +7,7 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (options) =
     jsxImportSource: 'react',
     extensions: [] as string[],
     render: (src: string) => src,
-    extract: (_src: string) => ({}),
+    extract: (_src: string) => ({}) as Record<string, unknown>,
     ...options?.default ?? {},
   }
   return Object.entries(options ?? {})
@@ -19,13 +19,14 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (options) =
         return options.extensions.some(ext => id.endsWith(`${ext}`))
       },
       transform(code) {
-        return `
-          import htm from 'htm'
-          import jsx from ${JSON.stringify(options.jsxImportSource)}
-          const html = htm.bind(jsx.createElement)
-          export default html([${JSON.stringify(options.render(code))}])
-          export ${JSON.stringify(options.extract(code))}
-        `
+        return [
+          `import htm from 'htm';`,
+          `import jsx from ${JSON.stringify(options.jsxImportSource)};`,
+          `const html = htm.bind(jsx.createElement);`,
+          `export default html([${JSON.stringify(options.render(code))}]);`,
+          ...Object.entries(options.extract(code))
+            .map(([key, value]) => `export const ${key} = ${JSON.stringify(value)};`),
+        ].join('\n')
       },
     }))
 }
