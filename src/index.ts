@@ -20,10 +20,9 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (options) =
       },
       transform(code) {
         return [
-          `import htm from 'htm';`,
-          `import jsx from ${JSON.stringify(options.jsxImportSource)};`,
-          `const html = htm.bind(jsx.createElement);`,
-          `export default html([${JSON.stringify(options.render(code))}]);`,
+          `import parse from 'html-react-parser';`,
+          `import library from ${JSON.stringify(options.jsxImportSource)};`,
+          `export default parse(${JSON.stringify(options.render(code))}, {library});`,
           ...Object.entries(options.extract(code))
             .map(([key, value]) => `export const ${key} = ${JSON.stringify(value)};`),
         ].join('\n')
