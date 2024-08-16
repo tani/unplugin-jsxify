@@ -5,6 +5,12 @@ import Unplugin from '../src/vite'
 export default defineConfig({
   plugins: [
     Inspect(),
-    Unplugin(),
+    Unplugin({
+      html: {
+        extensions: ['.html', '.htm'],
+        jsxImportSource: 'react',
+        render: (src: string) => src,
+      }
+    }),
   ],
 })
