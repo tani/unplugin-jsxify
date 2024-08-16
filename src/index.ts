@@ -7,6 +7,7 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (options) =
     jsxImportSource: 'react',
     extensions: [] as string[],
     render: (src: string) => src,
+    extract: (_src: string) => {},
     ...options?.default ?? {},
   }
   return Object.entries(options ?? {})
@@ -23,6 +24,7 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (options) =
           import jsx from ${JSON.stringify(options.jsxImportSource)}
           const html = htm.bind(jsx.createElement)
           export default htm([${JSON.stringify(options.render(code))}])
+          export ${JSON.parse(JSON.stringify(options.extract(code)))}
         `
       },
     }))
