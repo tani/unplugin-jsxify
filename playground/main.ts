@@ -1,4 +1,5 @@
 import app from './index.html'
 
-console.log(app);
+/* eslint-disable-next-line no-console */
+console.log(app)
 document.getElementById('app')!.innerHTML = '__UNPLUGIN__'

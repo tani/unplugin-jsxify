@@ -2,8 +2,8 @@ import type { UnpluginFactory } from 'unplugin'
 import { createUnplugin } from 'unplugin'
 import type { Options } from './types'
 
-export const unpluginFactory: UnpluginFactory<Options | undefined> = options => {
-  const defaultOptions = { 
+export const unpluginFactory: UnpluginFactory<Options | undefined> = (options) => {
+  const defaultOptions = {
     jsxImportSource: 'react',
     extensions: [] as string[],
     render: (src: string) => src,
@@ -11,8 +11,8 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = options => 
   }
   return Object.entries(options ?? {})
     .filter(([key]) => key !== 'default')
-    .map(([key, options])=>([key, { ...defaultOptions, ...options}] as const))
-    .map(([key, options])=>({
+    .map(([key, options]) => ([key, { ...defaultOptions, ...options }] as const))
+    .map(([key, options]) => ({
       name: `unplugin-jsx/${key}`,
       transformInclude(id) {
         return options.extensions.some(ext => id.endsWith(`${ext}`))

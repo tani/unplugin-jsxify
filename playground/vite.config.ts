@@ -10,7 +10,7 @@ export default defineConfig({
         extensions: ['.html', '.htm'],
         jsxImportSource: 'react',
         render: (src: string) => src,
-      }
+      },
     }),
   ],
 })
