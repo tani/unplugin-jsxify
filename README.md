@@ -22,7 +22,7 @@ Jsxify({
     extensions: [], // to detect target files
     jsxImportSource: 'react', // to compile the HTML content to JSX components
     render: (src: string) => src, // to compile the original content to HTML
-    extract: (_src: string) => {}, // to extract metadata from the original content
+    extract: (_src: string) => ({}), // to extract metadata from the original content
   },
   /* EXAMPLE:
   html: {
