@@ -139,3 +139,23 @@ build({
 ```
 
 <br></details>
+
+# Workaround
+
+If you encounter issues related to html-react-parser, please try the following configuration:
+
+```typescript
+export default defineConfig({
+  build: {
+    rollupOptions: {
+      external: ['html-react-parser'],
+    },
+  },
+  ssr: {
+    external: ['html-react-parser'],
+  },
+  plugin: [
+    Jsxify({ /* options */})
+  ]
+})
+```
