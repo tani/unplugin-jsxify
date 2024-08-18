@@ -22,7 +22,9 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (options) =
         return [
           `import parse from 'html-react-parser';`,
           `import library from ${JSON.stringify(options.jsxImportSource)};`,
-          `export default () => parse(${JSON.stringify(options.render(code))}, {library});`,
+          `const children = [parse(${JSON.stringify(options.render(code))}, {library})].flat();`, // Normalize
+          `const element = library.createElement(library.Fragment, null, ...children);`,
+          `export default () => element`,
           ...Object.entries(options.extract(code))
             .map(([key, value]) => `export const ${key} = ${JSON.stringify(value)};`),
         ].join('\n')
